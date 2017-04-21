@@ -1,0 +1,58 @@
+
+
+<html lang="en">
+  <head>
+
+    <meta charset="utf-8">
+    <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto">
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  </head>
+  <style type="text/css">
+  	.jumbotron{
+  		background-color:#483D8B;
+  		text-align:center;
+	}
+  .form
+  {
+    padding-right: 50px;
+    padding-left: 50px;
+  }
+  h1{
+    padding-left: 1cm;
+  }
+
+  p {
+        padding-left: 1cm;
+        font-family: 'Roboto', serif;
+        font-size: 20px;
+        font-weight: bold;
+  }
+
+
+  </style>
+  <body>
+{% extends "base.html" %}
+
+{% block content %}
+  <h1>Sign In</h1>
+  <form action="" method="post" name="results">
+      {{ form.hidden_tag() }}
+      <p>
+          Please enter your desired food item:<br>
+          {{ form.search_term(size=80) }}<br>
+      </p>
+      <p>
+          Please enter your desired location:<br>
+          {{ form.location(size=80) }}<br>
+      </p>
+      <p><input type="submit" value="Search"></p>
+  </form>
+</body>
+{% endblock %}
+</html>

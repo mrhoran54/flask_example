@@ -1,0 +1,67 @@
+<html>
+
+<html lang="en">
+  <head>
+
+    <title>RoundTable</title>
+    <meta charset="utf-8">
+    <!-- Latest compiled and minified CSS -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto">
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  </head>
+  <style type="text/css">
+    .jumbotron{
+      background-color:#D9EBF1;
+      text-align:center;
+  }
+  .form
+  {
+    padding-right: 50px;
+  }
+  h1{
+    padding-left: 1cm;
+  }
+  h2{
+    padding-left: 1cm;
+  }
+  p {
+        padding-left: 1cm;
+        font-family: 'Roboto', serif;
+        font-size: 20px;
+        font-weight: bold;
+  }
+  img{
+    padding-left: 1cm;
+  }
+
+
+  </style>
+  <body>
+    {% extends "base.html" %}
+    {% block content %}
+    <h2> Top 3 from saved search are </h2>
+
+
+    <h2> {{ results["rest1"][1] }}</h2>
+    <p> rating: {{ results["rest1"][4] }} price: {{ results["rest1"][3] }}</p>
+    <img src='{{ results["rest1"][2] }}' alt="" style="width:128px;height:128px;">
+
+    <h2> {{ results["rest2"][1] }}</h2>
+    <p> rating: {{ results["rest2"][4] }} price: {{ results["rest2"][3] }}</p>
+    <img src='{{ results["rest2"][2] }}' alt="" style="width:128px;height:128px;">
+
+    <h2> {{ results["rest3"][1] }}</h2>
+    <p> rating: {{ results["rest3"][4] }} price: {{ results["rest3"][3] }}</p>
+    <img src='{{ results["rest3"][2] }}' alt="" style="width:128px;height:128px;">
+
+    <!--{% for post in posts %}
+    <div><p>{{ post.author.nickname }} says: <b>{{ post.body }}</b></p></div>
+    {% endfor %}-->
+    {% endblock %}
+  </body>
+</html>

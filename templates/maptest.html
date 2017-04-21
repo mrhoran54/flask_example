@@ -1,0 +1,141 @@
+
+<!DOCTYPE html >
+
+<style>
+    /* Always set the map height explicitly to define the size of the div
+     * element that contains the map. */
+    /* Optional: Makes the sample page fill the window. */
+      html, body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+        background-color: mediumaquamarine;
+      }
+      div.scrollmenu {
+        background-color: mediumaquamarine;
+      }
+      div.scrollmenu a:hover {
+        background-color: #76a6f2;
+      }
+      #map {
+        margin-top: 4%;
+        margin-left: 28%;
+        width: 70%;
+        height: 70%;
+      }
+      table {
+        align-content: center;
+        width: 20%;
+        height: auto;
+        border-collapse: collapse;
+        position:fixed;
+        margin-top: 4%;
+        margin-left: 2%;
+        font-size: 25px;
+      }
+
+      th, td {
+        border-bottom: 1px solid #ddd;
+        padding: 2px;
+        text-align: left;
+        font-size: 20px;
+        color: white;
+      }
+      /*tr:hover{background-color:grey}*/
+    </style>
+    {% extends "base.html" %}
+
+      <head>
+        <meta name="viewport" content="initial-scale=1.0, user-scalable=no" />
+        <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+        <title>Trying to add and save markers</title>
+
+      </head>
+      <body>
+        {% block content %}
+
+        <div id="message"> Hello {{ username }} !</div>
+        <div id="message"> Enter a bar you want to go to!</div>
+        <div id="map" height="460px" width="100%"></div>
+        <div id="message">Location saved!</div>
+        <script>
+          var map;
+          var marker;
+          var infowindow;
+          var messagewindow;
+
+          function initMap() {
+            var Boston = {lat: 42.3601, lng: -71.057083};
+            map = new google.maps.Map(document.getElementById('map'), {
+              center: Boston,
+              zoom: 15
+            });
+
+            infowindow = new google.maps.InfoWindow({
+              content: document.getElementById('form')
+            })
+
+            messagewindow = new google.maps.InfoWindow({
+              content: document.getElementById('message')
+            });
+
+            google.maps.event.addListener(map, 'click', function(event) {
+              marker = new google.maps.Marker({
+                position: event.latLng,
+                map: map
+              });
+
+
+              google.maps.event.addListener(marker, 'click', function() {
+                infowindow.open(map, marker);
+              });
+            });
+          }
+
+          function saveData() {
+            var name = escape(document.getElementById('name').value);
+            var address = escape(document.getElementById('address').value);
+            var type = document.getElementById('type').value;
+            var latlng = marker.getPosition();
+            print(latlng)
+            var url = 'phpsqlinfo_addrow.php?name=' + name + '&address=' + address +
+                      '&type=' + type + '&lat=' + latlng.lat() + '&lng=' + latlng.lng();
+              
+            print(url)
+
+            downloadUrl(url, function(data, responseCode) {
+
+              if (responseCode == 200 && data.length <= 1) {
+                infowindow.close();
+                messagewindow.open(map, marker);
+              }
+            });
+          }
+
+          function downloadUrl(url, callback) {
+            var request = window.ActiveXObject ?
+                new ActiveXObject('Microsoft.XMLHTTP') :
+                new XMLHttpRequest;
+
+            request.onreadystatechange = function() {
+              if (request.readyState == 4) {
+                request.onreadystatechange = doNothing;
+                callback(request.responseText, request.status);
+              }
+            };
+
+            request.open('GET', url, true);
+            request.send(null);
+          }
+
+          function doNothing () {
+          }
+
+        </script>
+        <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDPIxQ95g3W-PAd0WPy_PjM84-HtAKQp1U&callback=initMap">
+        </script>
+        {% endblock %}
+
+      </body>
+    </html>
