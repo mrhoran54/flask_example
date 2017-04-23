@@ -7,14 +7,14 @@
         <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
         <script src="https://maps.googleapis.com/maps/api/js?v=3.11&sensor=false" type="text/javascript"></script>
         <script type="text/javascript">
-            
+        
         // check DOM Ready
         $(document).ready(function() {
             // execute
             (function() {
                 // map options
                 var options = {
-                    zoom: 15,
+                    zoom: 12,
                     center: new google.maps.LatLng(42.3601, -71.057083), // centered US
                     mapTypeId: google.maps.MapTypeId.TERRAIN,
                     mapTypeControl: false
@@ -25,14 +25,21 @@
 //                // NY and CA sample Lat / Lng
                 var vals = [[{{ Marker[1][1]}},{{ Marker[1][0]}}],[{{ Marker[2][1]}},{{ Marker[2][0]}}],
                                                                     [{{ Marker[3][1]}},{{ Marker[3][0]}}],
-                                                                    [{{ Marker[4][1]}},{{ Marker[4][0]}}]]
+                                                                    [{{ Marker[4][1]}},{{ Marker[4][0]}}],
+                                                                    [{{ Marker[5][1]}},{{ Marker[5][0]}}],
+                                                                    [{{ Marker[6][1]}},{{ Marker[6][0]}}],
+                                                                    [{{ Marker[7][1]}},{{ Marker[7][0]}}],
+                                                                    [{{ Marker[8][1]}},{{ Marker[8][0]}}],
+                                                                    [{{ Marker[9][1]}},{{ Marker[9][0]}}],
+                                                                    [{{ Marker[10][1]}},{{ Marker[10][0]}}]
+                                                                    ]
                 // set multiple marker
 //                var vals = [[{{ Marker[1][1]}},{{ Marker[1][0]}},{{ Marker[1][2]}}],
 //                            [{{ Marker[2][1]}},{{ Marker[2][0]}},{{ Marker[2][2]}}],
 //                            [{{ Marker[3][1]}},{{ Marker[3][0]}},{{ Marker[3][2]}}],
 //                            [{{ Marker[4][1]}},{{ Marker[4][0]}},{{ Marker[4][2]}}]]
             
-                for (var i = 0; i < 4; i++) {
+                for (var i = 0; i < 10; i++) {
                     // init markers
                     
                     var marker = new google.maps.Marker({
@@ -56,16 +63,34 @@
             })();
         });
         </script>
+        <script>
+            function BAC() {
+                var x = document.getElementById("drink_num");
+                return x.value * 5;
+            }
+        </script>
             {% extends "base.html" %}
 
     </head>
     <body>
         {% block content %}
-        <div id="message"> Hello {{ username }} !</div>
+        <!--<div id="message"> Hello {{ username }} !</div> -->
+        <h1 id="message">{{ username }}, lets get you {{ drunk_level }} </h1>
         <img src='{{ user_picture_url }}' alt="" style="width:128px;height:128px;">
-          
+        
         <br>
-        <div id="message"> BAC CALCULATOR (hopefully ) !</div>
+        
+        Enter the number of drinks you have had so far:<input type="text" id="drink_num" onkeyup="BAC()">
+        
+        <br>
+        
+       
+        <!-- THIS IS HOW YOU ACCESS THE HEIGHT WEIGHT AND GENDER
+        <div id="message"> Hello {{ height['height'] }} !</div>
+        <div id="message"> Hello {{ weight['weight'] }} !</div>
+        <div id="message"> Hello {{ gender['gender'] }} !</div>
+        <input type="text" name="Enter how many drinks you have had"><br> -->
+        
         <div id="map" height="460px" width="100%"></div>
         <div id="map_canvas" style="width: 800px; height:500px;"></div>
     </body>

@@ -40,15 +40,15 @@
 {% extends "base.html" %}
 
 {% block content %}
-  <h1>Sign In</h1>
+  <h1>Drunk Food Time!</h1>
   <form action="" method="post" name="results">
       {{ form.hidden_tag() }}
       <p>
-          Please enter your desired food item:<br>
+          What do you want to it?<br>
           {{ form.search_term(size=80) }}<br>
       </p>
       <p>
-          Please enter your desired location:<br>
+          Where?<br>
           {{ form.location(size=80) }}<br>
       </p>
       <p><input type="submit" value="Search"></p>

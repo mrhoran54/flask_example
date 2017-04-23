@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  	<title>Drinking App</title>
+  	<title>Boston Drinking App</title>
     <meta charset="utf-8">
     <!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -88,6 +88,18 @@
     {% for error in form.weight.errors %}
       <span style="color: red;">[{{ error }}]</span>
     {% endfor %}<br>
+</p>
+      <p>
+    and gender : <br>
+        <input type="radio" name="gender" id = "gender" value="male" > Male<br>
+        <input type="radio" name="gender" id = "gender" value="female"> Female<br>
+        <input type="radio" name="gender" id = "gender" value="other"> Other
+<!--
+    {{ form.gender(size=40) }}
+    {% for error in form.gender.errors %}
+      <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}<br>
+-->
 </p>
       <p><input type="submit" value="Register"></p>
   </form>

@@ -81,10 +81,11 @@ class RegisterForm(Form):
     email = StringField('email', validators=[DataRequired()])
     height = StringField('height', validators=[DataRequired()])
     weight = StringField('weight', validators=[DataRequired()])
+    gender = StringField('gender')
     
 class bar_searchForm(Form):
-    message = StringField('username', validators=[DataRequired()])
-    area = StringField('username', validators=[DataRequired()])
+    drunk_level = StringField('drunk_level')
+    area = StringField('area', validators=[DataRequired()])
 
 # API constants, you shouldn't have to change these.
 API_HOST = 'https://api.yelp.com'
@@ -235,6 +236,9 @@ def register_user():
     email = form.email.data
     height = form.height.data
     weight = form.weight.data
+    gender =  form.gender.data
+    if(gender):
+        print("gender!!!!! " + gender)
     test =  isemailUnique(email)
 
     if test:
@@ -243,7 +247,8 @@ def register_user():
             "password":password,
             "email": email,
             "height": height,
-            "weight": weight
+            "weight": weight,
+            "gender": gender
         }
         user = User()
         user.id = email
@@ -429,7 +434,6 @@ def query_api(term, location):
         business_pic = businesses[i]['image_url']
         business_price = businesses[i]['price']
         business_rating = businesses[i]['rating']
-        business_rating = businesses[i]['zipcode']
 
         array_ret[i] = (business_id,business_name,business_pic,business_price,str(business_rating))
 
@@ -453,12 +457,12 @@ def search2(bearer_token, term, location):
 
 zips = [
     "West Roxbury","Jamaica Plain","South Boston","South End","Mission Hill","Fenway",
-    "Back Bay","Downtown Boston","Charlestown", "Brighton", "Allston", "Cambridge","Harvard Square","Somerville","Davis Square" 
+    "Back Bay","Downtown","Charlestown", "Brighton", "Allston", "Cambridge","Harvard Square","Somerville","Davis Square" 
 ]
 def query_api_2():
 
     bearer_token = obtain_bearer_token(API_HOST, TOKEN_PATH)
-    response = search2(bearer_token, "bars", "West Roxbury")
+    response = search2(bearer_token, "bars", "Davis Square")
     businesses = response.get('businesses')
 
     if not businesses:
@@ -516,14 +520,17 @@ def added_marker():
     form = bar_searchForm()
     
     if form.validate_on_submit():
-        message = form.message.data
+        #message = form.message.data
         area = form.area.data
+        drunk_level = form.drunk_level.data
         uid = flask_login.current_user.id
         height = users.find_one({"email":uid}, {'height': 1})
         weight = users.find_one({"email":uid}, {'weight': 1})
-    
-        print("logged in as" +uid)
+        gender = users.find_one({"email":uid}, {'gender': 1})
         
+        
+        #print(height["height"])
+        print("logged in as" +uid)
 #        zip_ = [v for (k,v) in zips.items() if k == area]
 #        zipcode = zip_[0]
 #        print(zipcode)
@@ -535,22 +542,21 @@ def added_marker():
 #                            "about":results[i]}
 #            bar_search3.insert(new_post)
 
-        markers = [None]*5
-        for i in range(5):
+        markers = [None]*15
+        for i in range(15):
             x = area + str(i)
             test1 = bar_search3.find_one({"location":x})
-            url = (test1["about"][0])
+            #url = (test1["about"][0])
             name = str(test1["about"][1])
             lat = (test1["about"][2])
             long = (test1["about"][3])
             new = [lat, long, name]
             markers[i] = new
             
-        
        
         # trying to get this map to work
-        
-        return render_template(('maptest2.html'), user_picture_url = get_facebook_profile_url(),username = uid ,height =height, weight =weight, Marker = markers)
+#        
+        return render_template(('maptest2.html'), user_picture_url = get_facebook_profile_url(),username = uid ,height = height, weight = weight, gender = gender, drunk_level = drunk_level, Marker = markers)
     
     return render_template('getting_location.html',
                             title='Getting Location',

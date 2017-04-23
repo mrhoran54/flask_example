@@ -2,7 +2,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-  	<title>Drinking App</title>
+  	<title>Boston Drinking App</title>
     <meta charset="utf-8">
     <!-- Latest compiled and minified CSS -->
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
@@ -60,13 +60,6 @@
   <!-- form here -->
  <form action="" method="post" name="bar_searchForm">
     {{ form.hidden_tag() }} <!-- for security -->
-    <p>
-    Enter a message:
-    {{ form.message(size=40) }}
-    {% for error in form.message.errors %}
-      <span style="color: red;">[{{ error }}]</span>
-    {% endfor %}
-    </p><p>
 <!--
     Enter an area to start your night:
     {{ form.area(size=40) }}
@@ -74,42 +67,41 @@
       <span style="color: red;">[{{ error }}]</span>
     {% endfor %}<p></p>
 -->
+     <p> How drunk would you like to be?<br>
+    <input type="radio" name="drunk_level" id = "drunk_level" value="buzzed" > buzzed <br>
+    <input type="radio" name="drunk_level" id = "drunk_level" value="tipsy"> tipsy <br>
+    <input type="radio" name="drunk_level" id = "drunk_level" value="classy_wine_drunk"> the classy wine drunk<br>
+    <input type="radio" name="drunk_level" id = "drunk_level" value="smashed"> smashed <br>
+    <input type="radio" name="drunk_level" id = "drunk_level" value="real drunk"> properly hammered <br>
+    <input type="radio" name="drunk_level" id = "drunk_level" value="the 'I'm fine' drunk"> the 'I'm fine' drunk <br>
+
+         
     <!--<div class="form-group">-->
     <!--<label for="area_bar">Area where you want to go out: </label><br>-->
-    
+    <p> And where would you like to get drunk?<br>
     <select name="area" id="area">
       <option>West Roxbury</option>
-      <option>Hyde Park</option>
-      <option>Mattapan</option>
-      <option>Rosalindale</option>
       <option>Jamaica Plain</option>
-      <option>Boston</option>
       <option>South Boston</option>
       <option>South End</option>
       <option>Fenway</option>
         <option>Mission Hill</option>
-        <option>Boston University</option>
         <option>Back Bay</option>
-        <option>Seaport</option>
         <option>Downtown</option>
-        <option>Westend</option>
         <option>Charlestown</option>
         <option>Brighton</option>
         <option>Allston</option>
-        <option>MIT</option>
         <option>Cambridge</option>
         <option>Harvard Square</option>
         <option>Somerville</option>
-        <option>Davis Square</option>
-        <option>Logan Airport</option>
-       
+        <option>Davis Square</option>       
         </select>
     
   <!--</div>-->
 </p>
       <p><input type="submit" value="submit"></p>
   </form>
- 
+ <p> ****DISCLAIMER: DRINK RESPONSIBLY AND BE SAFE, NOT MY FAULT IF YOU'RE A DRUNK BIDDIE</p>
 </div>
 </div>
   </body>
