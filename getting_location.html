@@ -1,0 +1,117 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+  	<title>Drinking App</title>
+    <meta charset="utf-8">
+    <!-- Latest compiled and minified CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Roboto">
+	<!-- jQuery library -->
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+	<!-- Latest compiled JavaScript -->
+	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <style type="text/css">
+  	.jumbotron{
+  		background-color:lightcoral;
+  		text-align:center;
+	  }
+	.well {
+		background-color: mediumaquamarine;
+	}
+	p {
+		font-family: 'Roboto', serif;
+    font-size: 14px;
+    font-weight: bold;
+	}
+  body {
+    background: mediumaquamarine !important;
+    background-size: 100%;
+  }
+  .wrapper {
+    margin-top: 80px;
+    margin-bottom: 80px;
+  }
+  .form-signin {
+    max-width: 380px;
+    padding: 15px 35px 45px;
+    margin: 0 auto;
+    background-color: lightgray;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+    label {
+    font-family: 'Roboto', serif;
+    font-size: 14px;
+    font-weight: bold;
+  }
+  </style>
+  {% extends "base.html" %}
+
+  <body>
+    {% block content %}
+
+  	<div class="jumbotron text-center">
+  		<h1>DrinkingApp</h1>
+  		<p>DrinkingApp Profile</p>
+	</div>
+  <div class="container">
+  <div class="row">
+  <!-- form here -->
+ <form action="" method="post" name="bar_searchForm">
+    {{ form.hidden_tag() }} <!-- for security -->
+    <p>
+    Enter a message:
+    {{ form.message(size=40) }}
+    {% for error in form.message.errors %}
+      <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}
+    </p><p>
+<!--
+    Enter an area to start your night:
+    {{ form.area(size=40) }}
+    {% for error in form.area.errors %}
+      <span style="color: red;">[{{ error }}]</span>
+    {% endfor %}<p></p>
+-->
+    <!--<div class="form-group">-->
+    <!--<label for="area_bar">Area where you want to go out: </label><br>-->
+    
+    <select name="area" id="area">
+      <option>West Roxbury</option>
+      <option>Hyde Park</option>
+      <option>Mattapan</option>
+      <option>Rosalindale</option>
+      <option>Jamaica Plain</option>
+      <option>Boston</option>
+      <option>South Boston</option>
+      <option>South End</option>
+      <option>Fenway</option>
+        <option>Mission Hill</option>
+        <option>Boston University</option>
+        <option>Back Bay</option>
+        <option>Seaport</option>
+        <option>Downtown</option>
+        <option>Westend</option>
+        <option>Charlestown</option>
+        <option>Brighton</option>
+        <option>Allston</option>
+        <option>MIT</option>
+        <option>Cambridge</option>
+        <option>Harvard Square</option>
+        <option>Somerville</option>
+        <option>Davis Square</option>
+        <option>Logan Airport</option>
+       
+        </select>
+    
+  <!--</div>-->
+</p>
+      <p><input type="submit" value="submit"></p>
+  </form>
+ 
+</div>
+</div>
+  </body>
+  {% endblock %}
+  </html>
