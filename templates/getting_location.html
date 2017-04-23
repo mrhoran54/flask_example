@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -39,6 +40,11 @@
     background-color: lightgray;
     border: 1px solid rgba(0, 0, 0, 0.1);
   }
+    label {
+    font-family: 'Roboto', serif;
+    font-size: 14px;
+    font-weight: bold;
+  }
   </style>
   {% extends "base.html" %}
 
@@ -51,46 +57,59 @@
 	</div>
   <div class="container">
   <div class="row">
-  <p align="left" > New Profile</p>
   <!-- form here -->
-  <form action="" method="post" name="login">
-      {{ form.hidden_tag() }} <!-- for security -->
-      <p>
-        Please create your username:<br>
-        {{ form.username(size=80) }}<br>
-        {% for error in form.username.errors %}
-          <span style="color: red;">[{{ error }}]</span>
-        {% endfor %}<br>
-    </p>
+ <form action="" method="post" name="bar_searchForm">
+    {{ form.hidden_tag() }} <!-- for security -->
     <p>
-      Please create a password:<br>
-      {{ form.password(size=80) }}<br>
-      {% for error in form.password.errors %}
-        <span style="color: red;">[{{ error }}]</span>
-      {% endfor %}<br>
-  </p>
-  <p>
-    Please enter your email:<br>
-    {{ form.email(size=80) }}<br>
-    {% for error in form.password.errors %}
-      <span style="color: red;">[{{ error }}]</span>
-    {% endfor %}<br>
-</p>
-      <p>
-    Enter your height (ft):
-    {{ form.height(size=40) }}
-    {% for error in form.height.errors %}
+    Enter a message:
+    {{ form.message(size=40) }}
+    {% for error in form.message.errors %}
       <span style="color: red;">[{{ error }}]</span>
     {% endfor %}
-</p><p>
-    and weight (lbs):
-    {{ form.weight(size=40) }}
-    {% for error in form.weight.errors %}
+    </p><p>
+<!--
+    Enter an area to start your night:
+    {{ form.area(size=40) }}
+    {% for error in form.area.errors %}
       <span style="color: red;">[{{ error }}]</span>
-    {% endfor %}<br>
+    {% endfor %}<p></p>
+-->
+    <!--<div class="form-group">-->
+    <!--<label for="area_bar">Area where you want to go out: </label><br>-->
+    
+    <select name="area" id="area">
+      <option>West Roxbury</option>
+      <option>Hyde Park</option>
+      <option>Mattapan</option>
+      <option>Rosalindale</option>
+      <option>Jamaica Plain</option>
+      <option>Boston</option>
+      <option>South Boston</option>
+      <option>South End</option>
+      <option>Fenway</option>
+        <option>Mission Hill</option>
+        <option>Boston University</option>
+        <option>Back Bay</option>
+        <option>Seaport</option>
+        <option>Downtown</option>
+        <option>Westend</option>
+        <option>Charlestown</option>
+        <option>Brighton</option>
+        <option>Allston</option>
+        <option>MIT</option>
+        <option>Cambridge</option>
+        <option>Harvard Square</option>
+        <option>Somerville</option>
+        <option>Davis Square</option>
+        <option>Logan Airport</option>
+       
+        </select>
+    
+  <!--</div>-->
 </p>
-      <p><input type="submit" value="Register"></p>
+      <p><input type="submit" value="submit"></p>
   </form>
+ 
 </div>
 </div>
   </body>
