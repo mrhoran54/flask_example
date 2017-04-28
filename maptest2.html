@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+        <title>Multiple Markers Google Maps</title>
+        <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <script src="https://maps.googleapis.com/maps/api/js?v=3.11&sensor=false" type="text/javascript"></script>
+        <script type="text/javascript">
+        
+        // check DOM Ready
+        $(document).ready(function() {
+            // execute
+            (function() {
+                // map options
+                var options = {
+                    zoom: 12,
+                    center: new google.maps.LatLng(42.3601, -71.057083), // centered US
+                    mapTypeId: google.maps.MapTypeId.TERRAIN,
+                    mapTypeControl: false
+                };
+
+                // init map
+                var map = new google.maps.Map(document.getElementById('map_canvas'), options);
+//                // NY and CA sample Lat / Lng
+                var vals = [[{{ Marker[1][1]}},{{ Marker[1][0]}}],[{{ Marker[2][1]}},{{ Marker[2][0]}}],
+                                                                    [{{ Marker[3][1]}},{{ Marker[3][0]}}],
+                                                                    [{{ Marker[4][1]}},{{ Marker[4][0]}}],
+                                                                    [{{ Marker[5][1]}},{{ Marker[5][0]}}],
+                                                                    [{{ Marker[6][1]}},{{ Marker[6][0]}}],
+                                                                    [{{ Marker[7][1]}},{{ Marker[7][0]}}],
+                                                                    [{{ Marker[8][1]}},{{ Marker[8][0]}}],
+                                                                    [{{ Marker[9][1]}},{{ Marker[9][0]}}],
+                                                                    [{{ Marker[10][1]}},{{ Marker[10][0]}}]
+                                                                    ]
+                for (var i = 0; i < 10; i++) {
+                    // init markers
+                    
+                    var marker = new google.maps.Marker({
+                        position: new google.maps.LatLng(
+                            vals[i][0], vals[i][1]),
+                        map: map,
+                        title: 'Click Me ' + i
+                    });
+
+                    // process multiple info windows
+                    (function(marker, i) {
+                        // add click event
+                        google.maps.event.addListener(marker, 'click', function() {
+                            infowindow = new google.maps.InfoWindow({
+                                content: 'one day Ill name you'
+                            });
+                            infowindow.open(map, marker);
+                        });
+                    })(marker, i);
+                }
+            })();
+        });
+        </script>
+        <script>
+            function BAC() {
+                var x = document.getElementById("drink_num").value;
+                var gender_const = document.getElementById("gender").value;
+                
+                if (gender_const == "male") {
+                    gender_const = 0.68;
+                } else {
+                    gender_const = 0.55;
+                }
+                var grams_alc = x * 14;
+                var weight = {{ weight["weight"] }};
+                var body_weight_grams = weight *454;
+            
+                var raw_number = grams_alc / (gender_const * body_weight_grams);// / body_weight_grams;
+                var percentage = raw_number * 100;
+                x = percentage;
+                document.getElementById('display').innerHTML = 
+                    x ;
+            }
+        </script>
+            {% extends "base.html" %}
+
+    </head>
+    <style type="text/css">
+  	.jumbotron{
+  		background-color:lightcoral;
+  		text-align:center;
+	  }
+	.well {
+		background-color: mediumaquamarine;
+	}
+	p {
+		font-family: 'Roboto', serif;
+    font-size: 14px;
+    font-weight: bold;
+	}
+        h2 {
+		font-family: 'Roboto', serif;
+    font-size: 16px;
+    font-weight: bold;
+	}
+  body {
+    background: mediumaquamarine !important;
+    background-size: 100%;
+  }
+  .wrapper {
+    margin-top: 80px;
+    margin-bottom: 80px;
+  }
+  .form-signin {
+    max-width: 380px;
+    padding: 15px 35px 45px;
+    margin: 0 auto;
+    background-color: lightgray;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+  }
+    nav ul a {
+    text-decoration: none;
+}
+
+article {
+    margin-left: 170px;
+    border-left: 1px solid gray;
+    padding: 1em;
+    overflow: hidden;
+}
+  </style>
+    <body>
+        
+    <div class="container">
+    <nav>
+        {% block content %}
+        <!--<div id="message"> Hello {{ username }} !</div> -->
+        <h2 id="message">{{ username }}, lets get you {{ drunk_level }} </h2>
+        <img src='{{ user_picture_url }}' alt="" style="width:70px;height:70px;">
+        
+        <br>
+        <form>
+            <label><b>Enter the number of drinks you have had so far (oz) :</b></label>
+            <label> For refrence: standard mix drink 1.5 oz, beer is 12 oz, glass of wine 5 oz</label>
+            <input type="text" id="drink_num">
+            <input type="text" id = "gender">
+        </form>
+        <input type="submit" onclick="BAC();"><br/>
+        
+        
+        <br>
+        <label>Your BAC is : </label>
+        <p><span id='display'></span></p>
+    </nav>
+       
+        <!-- THIS IS HOW YOU ACCESS THE HEIGHT WEIGHT AND GENDER
+        <div id="message"> Hello {{ height['height'] }} !</div>
+        <div id="message"> Hello {{ weight['weight'] }} !</div>
+        <input type="text" name="Enter how many drinks you have had"><br> -->
+   
+        <article id="map" height="460px" width="100%"></article>
+        <article id="map_canvas" style="width: 800px; height:500px;"></article>
+    
+        
+            {% endblock %}
+        </div>
+    </body>
+
+</html>

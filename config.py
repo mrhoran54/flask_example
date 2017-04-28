@@ -2,6 +2,7 @@ import os
 basedir = os.path.abspath(os.path.dirname(__file__))
 
 CSRF_ENABLED = True
+DEBUG = True
 SECRET_KEY = "345435dsmd.35##3f90ec8062a9e91707e70c2edb919f7e8236ddb5"
 SESSION_TYPE ='filesystem'
 
